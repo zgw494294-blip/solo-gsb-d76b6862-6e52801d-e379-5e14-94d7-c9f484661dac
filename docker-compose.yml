@@ -1,0 +1,14 @@
+services:
+  firmware:
+    build: .
+    image: dual-slot-firmware:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - firmware-data:/data
+    restart: unless-stopped
+
+# Docker creates and initializes this named volume automatically on first run;
+# firmware.db (slots, chunks, trial/token state) survives service restarts.
+volumes:
+  firmware-data:
